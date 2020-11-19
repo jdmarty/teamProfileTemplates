@@ -13,93 +13,7 @@ const render = require('./lib/htmlRenderer');
 const { create } = require("domain");
 
 //base questions
-const newEmployee = [
-    {
-        type: "confirm",
-        name: "newEmployee",
-        message: "Would you like to add a new employee to your team?",
-    }
-];
-
-const employeeType = [
-    {
-        type: 'list',
-        name: 'employeeType',
-        message: 'What type of employee would you like to add?',
-        choices: ['Manager', 'Engineer', 'Intern']
-    }
-]
-
-const newManager = [
-    {
-        type: 'input',
-        name: 'name',
-        message: 'Manager Name:',
-    },
-    {
-        type: 'input',
-        name: 'id',
-        message: 'Manager ID:'
-    },
-    {
-        type: 'input',
-        name: 'email',
-        message: 'Manager Email:'
-    },
-    {
-        type: 'input',
-        name: 'officeNumber',
-        message: 'Manager Office Number:'
-    }
-]
-
-const newEngineer = [
-    {
-        type: 'input',
-        name: 'name',
-        message: 'Engineer Name:',
-    },
-    {
-        type: 'input',
-        name: 'id',
-        message: 'Engineer ID:'
-    },
-    {
-        type: 'input',
-        name: 'email',
-        message: 'Engineer Email:'
-    },
-    {
-        type: 'input',
-        name: 'github',
-        message: 'Engineer GitHub Username:'
-    }
-]
-
-const newIntern = [
-    {
-        type: 'input',
-        name: 'name',
-        message: 'Intern Name:',
-    },
-    {
-        type: 'input',
-        name: 'id',
-        message: 'Intern ID:'
-    },
-    {
-        type: 'input',
-        name: 'email',
-        message: 'Intern Email:'
-    },
-    {
-        type: 'input',
-        name: 'school',
-        message: 'Intern School:'
-    }
-]
-
-
+const { newEmployee, employeeType, newManager, newEngineer, newIntern } = require('./lib/prompts')
 
 //Function to ask if the user wants to add a new employee
 function askNewEmployee() {
@@ -111,6 +25,7 @@ function askEmployeeType() {
     return inquirer.prompt(employeeType)
 }
 
+//Function to create an employee from desired type
 async function createEmployee() {
     const { employeeType } = await askEmployeeType()
     switch (employeeType) {
@@ -126,25 +41,39 @@ async function createEmployee() {
     }
 }
 
-async function createEmployeesArray(current = []) {
-    
+//Function to create employees as long as requested
+async function createEmployeesArray(employees = []) {
+    const wantNew = await askNewEmployee();
+    if (!wantNew.add) return employees;
+    employees.push(await createEmployee());
+    logEmployees(employees)
+    return createEmployeesArray(employees);
 }
 
+//Function to log employees
+function logEmployees(employees) {
+    console.log("-".repeat(60));
+    console.log('Your Team');
+    console.log('-'.repeat(60))
+    employees.forEach(em => {
+        console.log(
+          `${em.getName()} | ${em.getRole()} | ID: ${em.getId()}`
+        );
+    })
+    console.log("-".repeat(60));
+}
 
+//set directory path to write teams file
+const outputsDir = path.resolve(__dirname, "./output");
 
+//function to write html from an array of employee objects
+async function writeTeamsPage() {
+    const employees = await createEmployeesArray()
+    const teamsHTML = render(employees);
+    fs.writeFile(path.resolve(outputsDir, "team.html"), teamsHTML, (err) => {
+      if (err) throw err;
+      console.log("Teams Page Generated!");
+    });
+}
 
-
-
-
-const outputsDir = path.resolve(__dirname, "./output")
-
-// const manager1 = new Manager("Josh", 1, "joshu", 100);
-// const manager2 = new Manager("Jeff", 2, "jeffu", 101);
-// const managers = [manager1, manager2];
-
-// const data = render(managers)
-
-// fs.writeFile(path.resolve(outputsDir, 'team.html'), data, err => {
-//     if (err) throw err;
-//     console.log('Team HTML generated')
-// })
+writeTeamsPage()
