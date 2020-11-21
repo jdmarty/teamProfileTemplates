@@ -1,3 +1,32 @@
+# Team Builder
+
+## Links
+Repository: [https://github.com/jdmarty/teamProfileTemplates](https://github.com/jdmarty/teamProfileTemplates)
+
+## Description
+
+This Node CLI application presents the user with a series of prompts that they can answer to generate HTML for a simple teams bio page
+
+## Installation
+
+1. Clone the github repository at [https://github.com/jdmarty/teamProfileTemplates](https://github.com/jdmarty/teamProfileTemplates) to your local machine.
+2. Navigate to the repository folder and open a command line
+3. Run npm install in the command line
+4. Run node app.js to initialize this app
+
+## Usage
+
+- When this app is initialized, the user will be prompted to confirm whether or not they want to add a new member to the teams page. Answer 'y' to add a new employee.
+- Select the type of team member that you want to add from the presented list (Manager, Engineer, or Intern).
+- Answer each subsequent prompt to generate information to be displayed on that team member's card.
+- Once all the the prompts have been answered, the app will log the current team and ask the user if they would like to add another member to the team. Answer 'y' to add another team member or 'n' to generate the teams page.
+
+## License
+
+This application uses the ISC license
+
+----------------------------------------------------------
+
 # Unit 10 OOP Homework: Template Engine - Employee Summary
 
 One of the most important aspects of programming is writing code that is readable, reliable, and maintainable. Oftentimes, *how* we design our code is just as important as the code itself. In this homework assignment, your challenge is to build a Node CLI that takes in information about employees and generates an HTML webpage that displays summaries for each person. Since testing is a key piece in making code maintainable, you will also be ensuring that all unit tests pass.
