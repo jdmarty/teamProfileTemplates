@@ -3,6 +3,8 @@
 ## Links
 Repository: [https://github.com/jdmarty/teamProfileTemplates](https://github.com/jdmarty/teamProfileTemplates)
 
+![Team Profiles Page](https://github.com/jdmarty/teamProfileTemplates/blob/main/Assets/profilePage.PNG)
+
 ## Description
 
 This Node CLI application presents the user with a series of prompts that they can answer to generate HTML for a simple teams bio page
