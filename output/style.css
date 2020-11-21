@@ -1,5 +1,8 @@
 /* Header */
-
+.team-heading {
+    background-color: #7d57c2;
+    color: white
+}
 
 /* Employee Cards */
 .employee-card {

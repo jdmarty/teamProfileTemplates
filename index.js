@@ -52,7 +52,7 @@ async function createEmployeesArray(employees = []) {
 
 //Function to log employees
 function logEmployees(employees) {
-    console.log("-".repeat(60));
+    console.log('\n');
     console.log('Your Team');
     console.log('-'.repeat(60))
     employees.forEach(em => {
@@ -60,7 +60,7 @@ function logEmployees(employees) {
           `${em.getName()} | ${em.getRole()} | ID: ${em.getId()}`
         );
     })
-    console.log("-".repeat(60));
+    console.log("-".repeat(60),'\n');
 }
 
 //set directory path to write teams file
