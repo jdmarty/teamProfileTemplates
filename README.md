@@ -16,6 +16,8 @@ This Node CLI application presents the user with a series of prompts that they c
 
 ## Usage
 
+[Instructional Video](https://drive.google.com/file/d/1P6MhGvHVZyPrSEHwx2cnxWaRGvQNvmPj/view?usp=sharing)
+
 - When this app is initialized, the user will be prompted to confirm whether or not they want to add a new member to the teams page. Answer 'y' to add a new employee.
 - Select the type of team member that you want to add from the presented list (Manager, Engineer, or Intern).
 - Answer each subsequent prompt to generate information to be displayed on that team member's card.
