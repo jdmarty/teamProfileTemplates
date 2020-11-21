@@ -10,10 +10,9 @@ const Manager = require('./lib/Manager');
 
 //HTML renderer
 const render = require('./lib/htmlRenderer');
-const { create } = require("domain");
 
 //base questions
-const { newEmployee, employeeType, newManager, newEngineer, newIntern } = require('./lib/prompts')
+const { newEmployee, employeeRole, newManager, newEngineer, newIntern } = require('./lib/prompts')
 
 //Function to ask if the user wants to add a new employee
 function askNewEmployee() {
@@ -22,7 +21,7 @@ function askNewEmployee() {
 
 //Function to ask for the type of employee
 function askEmployeeType() {
-    return inquirer.prompt(employeeType)
+    return inquirer.prompt(employeeRole)
 }
 
 //Function to create an employee from desired type
@@ -31,6 +30,8 @@ async function createEmployee() {
     switch (employeeType) {
         case 'Manager':
             const { name: nameMan, id: idMan, email: emailMan, officeNumber } = await inquirer.prompt(newManager)
+            //only one manager per team, remove manager as an option
+            employeeRole[0].choices = employeeRole[0].choices.slice(1)
             return new Manager(nameMan, idMan, emailMan, officeNumber);
         case 'Engineer':
             const { name: nameEng, id: idEng, email: emailEng, github } = await inquirer.prompt(newEngineer)

@@ -11,8 +11,8 @@ This Node CLI application presents the user with a series of prompts that they c
 
 1. Clone the github repository at [https://github.com/jdmarty/teamProfileTemplates](https://github.com/jdmarty/teamProfileTemplates) to your local machine.
 2. Navigate to the repository folder and open a command line
-3. Run npm install in the command line
-4. Run node app.js to initialize this app
+3. Run "npm install" in the command line
+4. Run "node app.js" to initialize this app
 
 ## Usage
 

@@ -11,14 +11,14 @@
       box-shadow: 5px 5px 8px #888888;
 }
 
-.manager-header {
+.manager-color {
     background-color: #cfbd67;
 }
 
-.engineer-header {
+.engineer-color {
     background-color: #679dcf;
 }
 
-.intern-header {
+.intern-color {
     background-color: #67cf83;
 }

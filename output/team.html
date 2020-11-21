@@ -10,29 +10,73 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/c502137733.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <header class="container-fluid">
         <div class="row">
-            <div class="col-12 jumbotron jumbotron-fluid mb-3 team-heading p-3">
-                <h1 class="text-center display-3">My Team</h1>
+            <div class="col-12 jumbotron jumbotron-fluid mb-3 team-heading p-3 text-center">
+                <h1 class="display-3 mb-3">My Team</h1>
+                <button type="button" class="btn manager-color" id="showManager">Manager</button>
+                <button type="button" class="btn engineer-color" id="showEngineer">Engineers</button>
+                <button type="button" class="btn intern-color" id="showIntern">Interns</button>
+                <button type="button" class="btn btn-secondary" id="showAll">All</button>
             </div>
         </div>
     </header>
     <main class="container-fluid">
         <div class="row">
             <div class="team-area col-12 d-flex flex-wrap justify-content-center">
-                <article class="card employee-card">
-    <div class="card-header manager-header">
-        <h2 class="card-title"></h2>
+                <article class="card employee-card manager-card">
+    <div class="card-header manager-color">
+        <h2 class="card-title">Doug</h2>
         <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>Manager</h3>
     </div>
     <div class="card-body">
         <ul class="list-group">
-            <li class="list-group-item">ID: </li>
-            <li class="list-group-item">Email: <a href="mailto:"></a></li>
-            <li class="list-group-item">Office number: </li>
+            <li class="list-group-item">ID: 101</li>
+            <li class="list-group-item">Email: <a href="mailto:doug@work.com">doug@work.com</a></li>
+            <li class="list-group-item">Office number: 101</li>
+        </ul>
+    </div>
+</article>
+<article class="card employee-card engineer-card">
+    <div class="card-header engineer-color">
+        <h2 class="card-title">Josh</h2>
+        <h3 class="card-title"><i class="fas fa-glasses mr-2"></i>Engineer</h3>
+    </div>
+    <div class="card-body">
+        <ul class="list-group">
+            <li class="list-group-item">ID: 201</li>
+            <li class="list-group-item">Email: <a href="mailto:josh@work.com">josh@work.com</a></li>
+            <li class="list-group-item">GitHub: <a href="https://github.com/jdmarty" target="_blank" rel="noopener noreferrer">jdmarty</a></li>
+        </ul>
+    </div>
+</article>
+<article class="card employee-card engineer-card">
+    <div class="card-header engineer-color">
+        <h2 class="card-title">Jeff</h2>
+        <h3 class="card-title"><i class="fas fa-glasses mr-2"></i>Engineer</h3>
+    </div>
+    <div class="card-body">
+        <ul class="list-group">
+            <li class="list-group-item">ID: 202</li>
+            <li class="list-group-item">Email: <a href="mailto:jeff@work.com">jeff@work.com</a></li>
+            <li class="list-group-item">GitHub: <a href="https://github.com/jeffy" target="_blank" rel="noopener noreferrer">jeffy</a></li>
+        </ul>
+    </div>
+</article>
+<article class="card employee-card intern-card">
+    <div class="card-header intern-color">
+        <h2 class="card-title">Justine</h2>
+        <h3 class="card-title"><i class="fas fa-user-graduate mr-2"></i>Intern</h3>
+    </div>
+    <div class="card-body">
+        <ul class="list-group">
+            <li class="list-group-item">ID: 301</li>
+            <li class="list-group-item">Email: <a href="mailto:justine@work.com">justine@work.com</a></li>
+            <li class="list-group-item">School: UCI</li>
         </ul>
     </div>
 </article>
@@ -40,6 +84,25 @@
             </div>
         </div>
     </main>
+    <script>
+        const $managerCard = $('.manager-card');
+        const $engineerCard = $('.engineer-card');
+        const $internCard = $('.intern-card');
+        const cards = [$managerCard, $engineerCard, $internCard]
+
+        function showCards(show) {
+            cards.forEach(card => card === show ? card.show() : card.hide());
+        }
+
+        function showAllCards() {
+            $('.card').show();
+        }
+
+        $('#showManager').on('click', () => showCards($managerCard))
+        $('#showEngineer').on('click', () => showCards($engineerCard))
+        $('#showIntern').on('click', () => showCards($internCard))
+        $('#showAll').on('click', showAllCards)
+    </script>
 </body>
 
 </html>

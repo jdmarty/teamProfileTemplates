@@ -10,13 +10,18 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/c502137733.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <header class="container-fluid">
         <div class="row">
-            <div class="col-12 jumbotron jumbotron-fluid mb-3 team-heading p-3">
-                <h1 class="text-center display-3">My Team</h1>
+            <div class="col-12 jumbotron jumbotron-fluid mb-3 team-heading p-3 text-center">
+                <h1 class="display-3 mb-3">My Team</h1>
+                <button type="button" class="btn manager-color" id="showManager">Manager</button>
+                <button type="button" class="btn engineer-color" id="showEngineer">Engineers</button>
+                <button type="button" class="btn intern-color" id="showIntern">Interns</button>
+                <button type="button" class="btn btn-secondary" id="showAll">All</button>
             </div>
         </div>
     </header>
@@ -27,6 +32,25 @@
             </div>
         </div>
     </main>
+    <script>
+        const $managerCard = $('.manager-card');
+        const $engineerCard = $('.engineer-card');
+        const $internCard = $('.intern-card');
+        const cards = [$managerCard, $engineerCard, $internCard]
+
+        function showCards(show) {
+            cards.forEach(card => card === show ? card.show() : card.hide());
+        }
+
+        function showAllCards() {
+            $('.card').show();
+        }
+
+        $('#showManager').on('click', () => showCards($managerCard))
+        $('#showEngineer').on('click', () => showCards($engineerCard))
+        $('#showIntern').on('click', () => showCards($internCard))
+        $('#showAll').on('click', showAllCards)
+    </script>
 </body>
 
 </html>
