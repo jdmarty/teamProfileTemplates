@@ -1,0 +1,20 @@
+/* Header */
+
+
+/* Employee Cards */
+.employee-card {
+    width: 18rem;
+    margin: 10px;
+}
+
+.manager-header {
+    background-color: #cfbd67;
+}
+
+.engineer-header {
+    background-color: #679dcf;
+}
+
+.intern-header {
+    background-color: #67cf83;
+}
