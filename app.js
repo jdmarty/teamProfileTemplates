@@ -12,44 +12,44 @@ const Manager = require('./lib/Manager');
 const render = require('./lib/htmlRenderer');
 
 //base questions
-const { newEmployee, employeeRole, newManager, newEngineer, newIntern } = require('./lib/prompts')
+const { newEmployee, employeeRole, newManager, newEngineer, newIntern } = require('./lib/prompts');
 
 //Function to ask if the user wants to add a new employee
 function askNewEmployee() {
-    return inquirer.prompt(newEmployee)
-}
+    return inquirer.prompt(newEmployee);
+};
 
 //Function to ask for the type of employee
 function askEmployeeType() {
-    return inquirer.prompt(employeeRole)
-}
+    return inquirer.prompt(employeeRole);
+};
 
 //Function to create an employee from desired type
 async function createEmployee() {
-    const { employeeType } = await askEmployeeType()
+    const { employeeType } = await askEmployeeType();
     switch (employeeType) {
         case 'Manager':
-            const { name: nameMan, id: idMan, email: emailMan, officeNumber } = await inquirer.prompt(newManager)
+            const { name: nameMan, id: idMan, email: emailMan, officeNumber } = await inquirer.prompt(newManager);
             //only one manager per team, remove manager as an option
-            employeeRole[0].choices = employeeRole[0].choices.slice(1)
+            employeeRole[0].choices = employeeRole[0].choices.slice(1);
             return new Manager(nameMan, idMan, emailMan, officeNumber);
         case 'Engineer':
-            const { name: nameEng, id: idEng, email: emailEng, github } = await inquirer.prompt(newEngineer)
+            const { name: nameEng, id: idEng, email: emailEng, github } = await inquirer.prompt(newEngineer);
             return new Engineer(nameEng, idEng, emailEng, github);
         case('Intern'):
-            const { name: nameInt, id: idInt, email: emailInt, school } = await inquirer.prompt(newIntern)
+            const { name: nameInt, id: idInt, email: emailInt, school } = await inquirer.prompt(newIntern);
             return new Intern(nameInt, idInt, emailInt, school);
-    }
-}
+    };
+};
 
 //Function to create employees as long as requested
 async function createEmployeesArray(employees = []) {
     const wantNew = await askNewEmployee();
     if (!wantNew.add) return employees;
     employees.push(await createEmployee());
-    logEmployees(employees)
+    logEmployees(employees);
     return createEmployeesArray(employees);
-}
+};
 
 //Function to log employees
 function logEmployees(employees) {
@@ -62,19 +62,19 @@ function logEmployees(employees) {
         );
     })
     console.log("-".repeat(60),'\n');
-}
+};
 
 //set directory path to write teams file
 const outputsDir = path.resolve(__dirname, "./output");
 
 //function to write html from an array of employee objects
 async function writeTeamsPage() {
-    const employees = await createEmployeesArray()
+    const employees = await createEmployeesArray();
     const teamsHTML = render(employees);
     fs.writeFile(path.resolve(outputsDir, "team.html"), teamsHTML, (err) => {
       if (err) throw err;
       console.log("Teams Page Generated!");
     });
-}
+};
 
 writeTeamsPage()
